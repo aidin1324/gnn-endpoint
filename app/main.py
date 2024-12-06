@@ -1,11 +1,10 @@
 import torch
-from torch import nn, optim, Tensor
+from torch import nn, Tensor
 
-from collections import defaultdict
 
 from torch_geometric.nn.conv.gcn_conv import gcn_norm
 from torch_geometric.nn.conv import MessagePassing
-from torch_sparse import SparseTensor, matmul
+from torch_sparse import SparseTensor
 
 num_users = 610
 num_movies = 9724
@@ -188,7 +187,7 @@ class LightGCN(MessagePassing):
 #                  num_items=num_movies,
 #                  K=layers)
 
-model = torch.load("C:/Users/USER/Desktop/projects/GNN/app/full_model.pth")
+model = torch.load("C:\\Users\\User\\Desktop\\gnn-endpoint\\app\\full_model.pth")
 
 
 def get_diverse_recommendations(model, new_user_ratings, num_recommendations=10, diversity_factor=0.3):

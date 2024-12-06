@@ -1,5 +1,6 @@
 import requests
 import json
+import pandas as pd
 
 # URL вашего эндпоинта
 url = 'http://localhost:5000/recommend'
@@ -7,28 +8,33 @@ url = 'http://localhost:5000/recommend'
 # Данные для отправки
 payload = {
     "user_ratings": {
-        0: 5,
-        1: 4,
-        2: 3,
-        3: 5,
-        4: 2,
-        5: 4,
-        6: 5,
-        7: 3
+        1: 5,
+        2: 4,
+        3: 3,
+        12: 5,
+        11: 2,
+        6: 4,
+        15: 5,
+        8: 3
     },
-    "num_recommendations": 20,
+    "num_recommendations": 10,
     "diversity_factor": 0.3
 }
 
-# Заголовки запроса
 headers = {
     "Content-Type": "application/json"
 }
 
-# Отправка POST-запроса
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 
-# Проверка статуса ответа и вывод результата
+movies_df = pd.read_csv("app\\ml-latest-small\\movies.csv")
+
+print("Оценки пользователя:\n")
+for movie_id, rating in payload["user_ratings"].items():
+    print(f"Фильм: {movies_df[movies_df['movieId'] == movie_id]['title'].values[0]}, Оценка: {rating}")
+
+print("\n")
+
 if response.status_code == 200:
     recommended_movies = response.json()
     print("Рекомендованные фильмы:")
