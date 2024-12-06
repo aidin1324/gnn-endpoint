@@ -18,7 +18,7 @@ payload = {
         8: 3
     },
     "num_recommendations": 10,
-    "diversity_factor": 0.3
+    "diversity_factor": 0.1
 }
 
 headers = {
@@ -27,7 +27,7 @@ headers = {
 
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 
-movies_df = pd.read_csv("app\\ml-latest-small\\movies.csv")
+movies_df = pd.read_csv("app/ml-latest-small/movies.csv")
 
 print("Оценки пользователя:\n")
 for movie_id, rating in payload["user_ratings"].items():

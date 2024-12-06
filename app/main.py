@@ -187,7 +187,7 @@ class LightGCN(MessagePassing):
 #                  num_items=num_movies,
 #                  K=layers)
 
-model = torch.load("C:\\Users\\User\\Desktop\\gnn-endpoint\\app\\full_model.pth")
+model = torch.load("app/full_model.pth")
 
 
 def get_diverse_recommendations(model, new_user_ratings, num_recommendations=10, diversity_factor=0.3):
